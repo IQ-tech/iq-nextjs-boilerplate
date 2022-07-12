@@ -1,8 +1,8 @@
 if (!self.define) {
   let e,
     s = {}
-  const n = (n, t) => (
-    (n = new URL(n + '.js', t).href),
+  const n = (n, a) => (
+    (n = new URL(n + '.js', a).href),
     s[n] ||
       new Promise((s) => {
         if ('document' in self) {
@@ -15,7 +15,7 @@ if (!self.define) {
         return e
       })
   )
-  self.define = (t, a) => {
+  self.define = (a, t) => {
     const i =
       e ||
       ('document' in self ? document.currentScript.src : '') ||
@@ -24,7 +24,7 @@ if (!self.define) {
     let c = {}
     const o = (e) => n(e, i),
       r = { module: { uri: i }, exports: c, require: o }
-    s[i] = Promise.all(t.map((e) => r[e] || o(e))).then((e) => (a(...e), c))
+    s[i] = Promise.all(a.map((e) => r[e] || o(e))).then((e) => (t(...e), c))
   }
 }
 define(['./workbox-5f5b08d6'], function (e) {
@@ -34,6 +34,14 @@ define(['./workbox-5f5b08d6'], function (e) {
     e.clientsClaim(),
     e.precacheAndRoute(
       [
+        {
+          url: '/_next/static/aApsf7CQCvMJrdoNBuLnk/_buildManifest.js',
+          revision: '6caa0d152582b9f6cd0ad93682cce73d',
+        },
+        {
+          url: '/_next/static/aApsf7CQCvMJrdoNBuLnk/_ssgManifest.js',
+          revision: '5352cb582146311d1540f6075d1f265e',
+        },
         {
           url: '/_next/static/chunks/framework-ae4f43955bfa5ddc.js',
           revision: 'ae4f43955bfa5ddc',
@@ -70,14 +78,6 @@ define(['./workbox-5f5b08d6'], function (e) {
           url: '/_next/static/css/27d177a30947857b.css',
           revision: '27d177a30947857b',
         },
-        {
-          url: '/_next/static/o-indT21dLslPdbP79dhb/_buildManifest.js',
-          revision: '6caa0d152582b9f6cd0ad93682cce73d',
-        },
-        {
-          url: '/_next/static/o-indT21dLslPdbP79dhb/_ssgManifest.js',
-          revision: '5352cb582146311d1540f6075d1f265e',
-        },
         { url: '/favicon.ico', revision: 'c30c7d42707a47a3f4591831641e50dc' },
         {
           url: '/img/icon-192.png',
@@ -103,7 +103,7 @@ define(['./workbox-5f5b08d6'], function (e) {
               request: e,
               response: s,
               event: n,
-              state: t,
+              state: a,
             }) =>
               s && 'opaqueredirect' === s.type
                 ? new Response(s.body, {
